@@ -55,6 +55,15 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    secretSantas  SecretSanta[]
+}
+
+model SecretSanta {
+    id              String    @id @default(cuid())
+    name            String?
+    presentsOpening DateTime?
+    userId          String
+    owner           User     @relation(fields: [userId], references: [id], onDelete: Cascade) 
 }
 
 model VerificationToken {
