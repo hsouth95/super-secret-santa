@@ -3,12 +3,12 @@ import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../../components/NavBar";
 
-import { api } from "../utils/api";
+import { api } from "../../utils/api";
 
-const Santa: NextPage = () => {
-  const secretSantas = api.secretSanta.getSecretSantas.useQuery();
+const SantaList: NextPage = () => {
+  const secretSantas = api.secretSanta.getAllSecretSantasByUser.useQuery();
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ const Santa: NextPage = () => {
         {secretSantas && (
           <span>
             {secretSantas.data?.map((ss) => {
-              return ss.name;
+              return <Link href={`/santa/${ss.id}`}>{ss.name}</Link>;
             })}
           </span>
         )}
@@ -30,4 +30,4 @@ const Santa: NextPage = () => {
   );
 };
 
-export default Santa;
+export default SantaList;
