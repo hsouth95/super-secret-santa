@@ -1,10 +1,9 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { UserNavItem } from "./UserNavItem";
 
 export const NavBar = () => {
-  const { data: sessionData } = useSession();
   return (
     <>
       <Head>
@@ -61,22 +60,7 @@ export const NavBar = () => {
             </Link>
           </div>
           <div>
-            <a
-              href="#"
-              className="mt-4 inline-block flex items-center rounded px-4 py-2 text-sm leading-none text-white lg:mt-0"
-            >
-              {sessionData && (
-                <div className="flex items-center p-1 hover:bg-gray-600">
-                  <span className="mr-4 ml-3 flex text-white">
-                    {sessionData?.user?.name}
-                  </span>
-                  <img
-                    className="mr-3 flex h-6 sm:h-9"
-                    src={sessionData?.user?.image}
-                  ></img>
-                </div>
-              )}
-            </a>
+            <UserNavItem />
           </div>
         </div>
       </nav>

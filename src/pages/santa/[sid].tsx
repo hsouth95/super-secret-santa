@@ -1,9 +1,10 @@
 import { NextPage } from "next";
-import { NavBar } from "../../components/NavBar";
 import Head from "next/head";
-import { api } from "../../utils/api";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+
+import { api } from "../../utils/api";
+import { NavBar } from "../../components/NavBar";
 
 const Santa: NextPage = () => {
   const router = useRouter();
