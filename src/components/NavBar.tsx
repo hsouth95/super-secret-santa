@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { UserNavItem } from "./UserNavItem";
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   return (
     <>
       <Head>
@@ -41,7 +41,7 @@ export const NavBar = () => {
         <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center">
           <div className="text-sm text-white lg:flex-grow">
             <Link
-              href="#responsive-header"
+              href="/"
               className="mt-4 mr-4 block rounded p-4 hover:bg-gray-600 lg:mt-0 lg:inline-block"
             >
               Home

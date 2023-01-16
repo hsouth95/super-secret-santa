@@ -25,6 +25,8 @@ const SantaList: NextPage = () => {
             })}
           </span>
         )}
+
+        <Link href="/santa/create">Create a Secret Santa</Link>
       </main>
     </>
   );

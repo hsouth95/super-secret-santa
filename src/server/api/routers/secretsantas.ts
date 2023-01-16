@@ -2,6 +2,15 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
+function createSecretSantaInput() {
+  return z.object({
+    name: z.string(),
+    description: z.string(),
+    date: z.string(),
+    userId: z.string(),
+  });
+}
+
 export const secretSantaRouter = createTRPCRouter({
   getAllSecretSantasByUser: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.secretSanta.findMany({
