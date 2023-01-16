@@ -47,16 +47,10 @@ export const NavBar: React.FC = () => {
               Home
             </Link>
             <Link
-              href="#responsive-header"
-              className="mt-4 mr-4 block rounded p-4 hover:bg-gray-600 lg:mt-0 lg:inline-block"
-            >
-              Examples
-            </Link>
-            <Link
               href="/santa"
               className="mt-4 block rounded p-4 hover:bg-gray-600 lg:mt-0 lg:inline-block"
             >
-              Blog
+              Events
             </Link>
           </div>
           <div>

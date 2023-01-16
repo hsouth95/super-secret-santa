@@ -63,7 +63,16 @@ model SecretSanta {
     name            String
     presentsOpening DateTime?
     userId          String
-    owner           User     @relation(fields: [userId], references: [id], onDelete: Cascade) 
+    owner           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    participants    Participant[]
+}
+
+model Participant {
+    id              String    @id @default(cuid())
+    name            String
+    email           String?
+    secretSantaId   String
+    secretSanta     SecretSanta @relation(fields: [secretSantaId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

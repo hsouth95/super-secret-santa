@@ -25,8 +25,21 @@ const Santa: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-
-      {secretSanta?.data?.name}
+      <main className="flex min-h-screen flex-col items-center bg-gray-700 text-gray-600">
+        <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
+          <h1 className="text-5xl font-bold text-white">
+            {secretSanta?.data?.name}
+          </h1>
+          <h2 className="mt-10 text-3xl font-bold text-white">Participants</h2>
+          {secretSanta?.data?.participants?.map((participant) => {
+            return (
+              <div key={participant.id} className="mt-5">
+                <p className="text-xl text-white">{participant.name}</p>
+              </div>
+            );
+          })}
+        </div>
+      </main>
     </>
   );
 };

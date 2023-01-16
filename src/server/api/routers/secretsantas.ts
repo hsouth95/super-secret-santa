@@ -26,6 +26,9 @@ export const secretSantaRouter = createTRPCRouter({
         where: {
           id: input.id,
         },
+        include: {
+          participants: true,
+        },
       });
     }),
   createSecretSanta: protectedProcedure

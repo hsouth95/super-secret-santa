@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
+
+import { ParticipantInput } from "../../components/ParticipantInput";
 
 import { NavBar } from "../../components/NavBar";
 import { api } from "../../utils/api";
@@ -36,17 +37,37 @@ export default SantaList;
 
 const Form: React.FC = () => {
   const { data: sessionData } = useSession();
-  const mutation = api.secretSanta.createSecretSanta.useMutation();
+  const secretSantaMutation = api.secretSanta.createSecretSanta.useMutation();
+  const participantMutation = api.participant.createParticipant.useMutation();
+  const [participants, setParticipants] = useState<string[]>([""]);
+
   const [secretSanta, setSecretSanta] = useState<SecretSantaProps>({
     name: "",
     userId: sessionData?.user?.id ? sessionData?.user?.id : "",
   });
 
+  function handleParticipantChange(participantList: string[]) {
+    setParticipants(participantList);
+  }
+
   return (
     <form
       className="mt-10 flex"
       onSubmit={(event) => {
-        mutation.mutate(secretSanta);
+        event.preventDefault();
+        secretSantaMutation.mutate(secretSanta);
+
+        if (!secretSantaMutation.data?.id) {
+          // TODO: Handle error
+          return;
+        }
+
+        participants.forEach((participant) => {
+          participantMutation.mutate({
+            name: participant,
+            secretSantaId: secretSantaMutation.data?.id,
+          });
+        });
       }}
     >
       <div>
@@ -63,6 +84,9 @@ const Form: React.FC = () => {
             setSecretSanta({ ...secretSanta, name: event.target.value });
           }}
         />
+
+        <label className="block text-white">Who is participating?</label>
+        <ParticipantInput handleParticipantChange={handleParticipantChange} />
       </div>
 
       <button className="form-input" type="submit">
