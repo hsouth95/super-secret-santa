@@ -3,16 +3,17 @@ import { useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 import { NavBar } from "../../components/NavBar";
 import { api } from "../../utils/api";
 
 interface SecretSantaProps {
   name: string;
+  userId: string;
 }
 
 const SantaList: NextPage = () => {
-  const secretSantas = api.secretSanta.getAllSecretSantasByUser.useQuery();
   return (
     <>
       <Head>
@@ -34,15 +35,18 @@ const SantaList: NextPage = () => {
 export default SantaList;
 
 const Form: React.FC = () => {
+  const { data: sessionData } = useSession();
+  const mutation = api.secretSanta.createSecretSanta.useMutation();
   const [secretSanta, setSecretSanta] = useState<SecretSantaProps>({
     name: "",
+    userId: sessionData?.user?.id ? sessionData?.user?.id : "",
   });
 
   return (
     <form
       className="mt-10 flex"
       onSubmit={(event) => {
-        console.log(event);
+        mutation.mutate(secretSanta);
       }}
     >
       <div>
@@ -61,7 +65,7 @@ const Form: React.FC = () => {
         />
       </div>
 
-      <button className="" type="submit">
+      <button className="form-input" type="submit">
         Create
       </button>
     </form>
