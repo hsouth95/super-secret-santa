@@ -7,10 +7,14 @@ interface ParticipantInputProps {
 export const ParticipantInput = ({
   handleParticipantChange,
 }: ParticipantInputProps) => {
-  const [participantList, setParticipantList] = useState<string[]>([""]);
+  const [participantList, setParticipantList] = useState<string[]>(["", ""]);
 
   function handleAddParticipant(event: any) {
     event.preventDefault();
+    if (participantList[participantList.length - 1] === "") {
+      // They haven't filled out the last one yet, so don't add another
+      return;
+    }
     setParticipantList([...participantList, ""]);
   }
 
@@ -19,9 +23,15 @@ export const ParticipantInput = ({
       {participantList.map((participant, index) => {
         return (
           <div key={index}>
+            {index === 0 ? (
+              <label className="block text-white">
+                The first one is you, so give yourself a name to display to the
+                others!
+              </label>
+            ) : null}
             <input
               type="text"
-              className="form-input mb-2 py-3 px-4"
+              className="form-input my-2 py-3 px-4"
               value={participant}
               onChange={(event) => {
                 const newParticipantList = [...participantList];
@@ -30,7 +40,12 @@ export const ParticipantInput = ({
 
                 handleParticipantChange(newParticipantList);
               }}
-              placeholder={`Enter participant ${index + 1}`}
+              placeholder={
+                index === 0
+                  ? "Enter your display name"
+                  : `Enter participant ${index + 1}`
+              }
+              required={index === 0 ? true : false}
             />
           </div>
         );

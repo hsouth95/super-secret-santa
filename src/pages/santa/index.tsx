@@ -17,16 +17,31 @@ const SantaList: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gray-700 text-gray-600">
-        {secretSantas && (
-          <span>
-            {secretSantas.data?.map((ss) => {
-              return <Link href={`/santa/${ss.id}`}>{ss.name}</Link>;
-            })}
-          </span>
-        )}
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gray-700 text-white">
+        <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
+          <h1 className="text-5xl font-bold text-white">
+            Upcoming Events you're organising
+          </h1>
+          {secretSantas && (
+            <span>
+              {secretSantas.data?.map((ss) => {
+                return (
+                  <Link href={`/santa/${ss.id}`}>
+                    <div className="my-10 bg-gray-500 p-10">
+                      <h2 className="text-2xl font-bold">{ss.name}</h2>
+                      <p className="text-xl">
+                        {ss.participants.length ? ss.participants.length : 0}{" "}
+                        members
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </span>
+          )}
 
-        <Link href="/santa/create">Create a Secret Santa</Link>
+          <Link href="/santa/create">Create a Secret Santa</Link>
+        </div>
       </main>
     </>
   );

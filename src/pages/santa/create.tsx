@@ -3,6 +3,7 @@ import { useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import { ParticipantInput } from "../../components/ParticipantInput";
 
@@ -36,9 +37,9 @@ const SantaList: NextPage = () => {
 export default SantaList;
 
 const Form: React.FC = () => {
+  const router = useRouter();
   const { data: sessionData } = useSession();
   const secretSantaMutation = api.secretSanta.createSecretSanta.useMutation();
-  const participantMutation = api.participant.createParticipant.useMutation();
   const [participants, setParticipants] = useState<string[]>([""]);
 
   const [secretSanta, setSecretSanta] = useState<SecretSantaProps>({
@@ -55,43 +56,52 @@ const Form: React.FC = () => {
       className="mt-10 flex"
       onSubmit={(event) => {
         event.preventDefault();
-        secretSantaMutation.mutate(secretSanta);
 
-        if (!secretSantaMutation.data?.id) {
-          // TODO: Handle error
-          return;
-        }
-
-        participants.forEach((participant) => {
-          participantMutation.mutate({
-            name: participant,
-            secretSantaId: secretSantaMutation.data?.id,
-          });
+        const data = {
+          ...secretSanta,
+          // Remove empty participants
+          participants: participants.filter((p) => p !== ""),
+        };
+        secretSantaMutation.mutate(data, {
+          onSuccess: (ss) => {
+            router.push(`/santa/${ss.id}`);
+          },
         });
       }}
     >
       <div>
-        <label htmlFor="santa-name" className="block text-white">
-          What do you want to name your event?
+        <div>
+          <label htmlFor="santa-name" className="block text-2xl text-white">
+            What do you want to name your event?
+          </label>
+          <input
+            id="santa-name"
+            type="text"
+            className="form-input mt-2 py-3 px-4"
+            value={secretSanta?.name}
+            placeholder="Name of the event"
+            onChange={(event) => {
+              setSecretSanta({ ...secretSanta, name: event.target.value });
+            }}
+            required={true}
+          />
+        </div>
+        <div className="my-5">
+          <label htmlFor="santa-date" className="block text-2xl text-white">
+            When is the event? You don't have to pick it now, we can do that
+            later
+          </label>
+          <input type="date" className="form-input mt-2 py-3 px-4" />
+        </div>
+
+        <label className="block text-2xl text-white">
+          Who do you want to invite?
         </label>
-        <input
-          id="santa-name"
-          type="text"
-          className="form-input py-3 px-4"
-          value={secretSanta?.name}
-          placeholder="Name of the event"
-          onChange={(event) => {
-            setSecretSanta({ ...secretSanta, name: event.target.value });
-          }}
-        />
-
-        <label className="block text-white">Who is participating?</label>
         <ParticipantInput handleParticipantChange={handleParticipantChange} />
+        <button className="form-input mt-5" type="submit">
+          Create
+        </button>
       </div>
-
-      <button className="form-input" type="submit">
-        Create
-      </button>
     </form>
   );
 };

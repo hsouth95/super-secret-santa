@@ -71,6 +71,7 @@ model Participant {
     id              String    @id @default(cuid())
     name            String
     email           String?
+    connectedAccount Boolean @default(false)
     secretSantaId   String
     secretSanta     SecretSanta @relation(fields: [secretSantaId], references: [id], onDelete: Cascade)
 }

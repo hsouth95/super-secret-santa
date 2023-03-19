@@ -1,13 +1,14 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
+import { participantRouter } from "./participant";
 
 function createSecretSantaInput() {
   return z.object({
     name: z.string(),
-    description: z.string().optional(),
     date: z.date().optional(),
     userId: z.string(),
+    participants: z.array(z.string()),
   });
 }
 
@@ -16,6 +17,9 @@ export const secretSantaRouter = createTRPCRouter({
     return ctx.prisma.secretSanta.findMany({
       where: {
         userId: ctx.session?.user?.id,
+      },
+      include: {
+        participants: true,
       },
     });
   }),
@@ -33,11 +37,25 @@ export const secretSantaRouter = createTRPCRouter({
     }),
   createSecretSanta: protectedProcedure
     .input(createSecretSantaInput())
-    .mutation(({ ctx, input }) => {
-      return ctx.prisma.secretSanta.create({
+    .mutation(async ({ ctx, input }) => {
+      console.log(input);
+      const secretSanta = await ctx.prisma.secretSanta.create({
         data: {
-          ...input,
+          name: input.name,
+          presentsOpening: input?.date,
+          userId: input.userId,
         },
       });
+
+      input.participants.map(async (participant) => {
+        await ctx.prisma.participant.create({
+          data: {
+            name: participant,
+            secretSantaId: secretSanta.id,
+          },
+        });
+      });
+
+      return secretSanta;
     }),
 });

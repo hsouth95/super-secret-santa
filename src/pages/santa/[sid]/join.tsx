@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-import { api } from "../../utils/api";
-import { NavBar } from "../../components/NavBar";
+import { api } from "../../../utils/api";
+import { NavBar } from "../../../components/NavBar";
 
-const Santa: NextPage = () => {
+const SantaJoin: NextPage = () => {
   const router = useRouter();
   const { data: sessionData } = useSession();
   const sid = router.query.sid as string;
@@ -29,27 +29,12 @@ const Santa: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center bg-gray-700 text-white">
         <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
           <h1 className="text-5xl font-bold text-white">
-            {secretSanta?.data?.name}
+            Want to join this Secret Santa?
           </h1>
-          <Link href={`/santa/${sid}/join`}>
-            <h2>Join</h2>
-          </Link>
-
-          <h2 className="mt-10 text-3xl font-bold text-white">Participants</h2>
-          {secretSanta?.data?.participants?.map((participant) => {
-            return (
-              <div key={participant.id} className="mt-5">
-                <p className="text-xl text-white">{participant.name}</p>
-                <Link href={`/join/${participant.id}`}>
-                  <p>Join</p>
-                </Link>
-              </div>
-            );
-          })}
         </div>
       </main>
     </>
   );
 };
 
-export default Santa;
+export default SantaJoin;
