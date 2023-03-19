@@ -38,10 +38,19 @@ const Santa: NextPage = () => {
           <h2 className="mt-10 text-3xl font-bold text-white">Participants</h2>
           {secretSanta?.data?.participants?.map((participant) => {
             return (
-              <div key={participant.id} className="mt-5">
+              <div
+                key={participant.id}
+                className={`mt-5 border-2 p-2 ${
+                  participant.userId ? "border-lime-400" : "border-amber-500"
+                }`}
+              >
                 <p className="text-xl text-white">{participant.name}</p>
                 <Link href={`/join/${participant.id}`}>
-                  <p>Join</p>
+                  <p>
+                    {participant.userId
+                      ? "Has accepted and linked account."
+                      : "Still needs to accept and link account."}
+                  </p>
                 </Link>
               </div>
             );

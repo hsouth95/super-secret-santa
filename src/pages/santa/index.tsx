@@ -3,6 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
+import { SecretSantaOwnerList } from "../../components/SecretSantaOwnerList";
+
 import { NavBar } from "../../components/NavBar";
 
 import { api } from "../../utils/api";
@@ -22,23 +24,7 @@ const SantaList: NextPage = () => {
           <h1 className="text-5xl font-bold text-white">
             Upcoming Events you're organising
           </h1>
-          {secretSantas && (
-            <span>
-              {secretSantas.data?.map((ss) => {
-                return (
-                  <Link href={`/santa/${ss.id}`}>
-                    <div className="my-10 bg-gray-500 p-10">
-                      <h2 className="text-2xl font-bold">{ss.name}</h2>
-                      <p className="text-xl">
-                        {ss.participants.length ? ss.participants.length : 0}{" "}
-                        members
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </span>
-          )}
+          <SecretSantaOwnerList />
 
           <Link href="/santa/create">Create a Secret Santa</Link>
         </div>

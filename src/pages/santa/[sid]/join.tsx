@@ -9,15 +9,14 @@ import { NavBar } from "../../../components/NavBar";
 
 const SantaJoin: NextPage = () => {
   const router = useRouter();
+  const participantMutation =
+    api.participant.connectParticipantToUser.useMutation();
   const { data: sessionData } = useSession();
   const sid = router.query.sid as string;
 
-  const secretSanta = api.secretSanta.getSecretSantaById.useQuery(
-    {
-      id: sid,
-    },
-    { enabled: sessionData?.user !== undefined }
-  );
+  const secretSanta = api.secretSanta.getSecretSantaById.useQuery({
+    id: sid,
+  });
   return (
     <>
       <Head>
@@ -29,8 +28,49 @@ const SantaJoin: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center bg-gray-700 text-white">
         <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
           <h1 className="text-5xl font-bold text-white">
-            Want to join this Secret Santa?
+            You've been invited to join the {secretSanta?.data?.name} event!
           </h1>
+
+          {sessionData?.user === undefined ? (
+            <>
+              <h2>
+                In order to enable the full functionality of this app, logging
+                in is required.
+              </h2>
+              <Link href="/api/auth/signin">
+                <button>Sign in</button>
+              </Link>
+            </>
+          ) : null}
+
+          {sessionData?.user !== undefined ? (
+            <>
+              <h2 className="text-2xl">Choose which participant you are:</h2>
+              <div>
+                {secretSanta?.data?.participants?.map((participant) => {
+                  return (
+                    <div key={participant.id} className="mt-5 bg-gray-400">
+                      <span>{participant.name}</span>
+                      <button
+                        onClick={() => {
+                          participantMutation.mutate({
+                            id: participant.id,
+                            userId: sessionData?.user?.id
+                              ? sessionData?.user?.id
+                              : "",
+                          });
+
+                          router.push(`/connect-done`);
+                        }}
+                      >
+                        Connect
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
         </div>
       </main>
     </>

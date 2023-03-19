@@ -8,7 +8,6 @@ import { NavBar } from "../components/NavBar";
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const { data: sessionData } = useSession();
 
   return (
@@ -24,34 +23,19 @@ const Home: NextPage = () => {
           <h1 className="text-gray text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             Super Secret Santa
           </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="bg-grey/10 flex max-w-xs flex-col gap-4 rounded-xl p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl">
-              {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-            </p>
+          <div className="container flex flex-col items-center justify-center px-10">
+            <h2 className="text-xl tracking-tight">
+              Welcome to our web application for creating Secret Santa events!
+              With our platform, you can easily organize a gift exchange without
+              anyone knowing who they will be buying a gift for until the big
+              reveal. Our application ensures that the names of the participants
+              are kept secret until the day of the gift exchange, adding an
+              element of excitement and surprise to the event. Plus, our
+              easy-to-use interface allows you to manage all the details of your
+              Secret Santa event, from setting up rules and deadlines to sending
+              out invitations and reminders. Get ready to spread some holiday
+              cheer with our Secret Santa web application!
+            </h2>
           </div>
         </div>
       </main>

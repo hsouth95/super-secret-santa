@@ -36,4 +36,24 @@ export const participantRouter = createTRPCRouter({
         },
       });
     }),
+  connectParticipantToUser: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        userId: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      if (!input.userId) {
+        throw new Error("No user id provided");
+      }
+      return ctx.prisma.participant.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          userId: input.userId,
+        },
+      });
+    }),
 });
