@@ -10,7 +10,6 @@ import { NavBar } from "../../components/NavBar";
 import { api } from "../../utils/api";
 
 const SantaList: NextPage = () => {
-  const secretSantas = api.secretSanta.getAllSecretSantasByUser.useQuery();
   return (
     <>
       <Head>

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { api } from "../utils/api";
+import dayjs from "dayjs";
 
 import {
   CalendarIcon,
@@ -31,7 +32,7 @@ export const SecretSantaOwnerList = () => {
             <Link href={`/santa/${ss.id}`}>
               <div className="my-10 bg-gray-500 p-10">
                 <h2 className="text-2xl font-bold">{ss.name}</h2>
-                {warnings.length > 0 ? (
+                {warnings.length > 0 && (
                   <div className="mt-2 inline">
                     {warnings.map((w) => {
                       return (
@@ -42,15 +43,16 @@ export const SecretSantaOwnerList = () => {
                       );
                     })}
                   </div>
-                ) : null}
+                )}
                 <p className="text-xl">
                   {ss.participants.length ? ss.participants.length : 0} members
                 </p>
                 <p>
                   {ss.presentsOpening ? (
                     <span>
-                      <CalendarIcon className="inline h-5 w-5" />
-                      ss.presentsOpening.getDate()
+                      <CalendarIcon className="mr-2 inline h-5 w-5" />
+
+                      {dayjs(ss.presentsOpening).format("ddd, MMM D, YYYY")}
                     </span>
                   ) : (
                     <div className="mt-2 inline">
