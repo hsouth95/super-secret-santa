@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
-import { participantRouter } from "./participant";
 
 function createSecretSantaInput() {
   return z.object({
@@ -43,7 +42,7 @@ export const secretSantaRouter = createTRPCRouter({
         data: {
           name: input.name,
           presentsOpening: input?.date,
-          userId: input.userId,
+          userId: ctx.session?.user?.id,
         },
       });
 

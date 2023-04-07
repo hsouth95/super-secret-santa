@@ -23,7 +23,7 @@ export const UserNavItem: React.FC = () => {
         </span>
         <img
           className="mr-3 flex h-6 sm:h-9"
-          src={sessionData?.user?.image}
+          src={sessionData?.user?.image as string}
         ></img>
         <button
           className="rounded-full bg-gray-600 px-10 py-3 font-semibold text-white no-underline transition"
