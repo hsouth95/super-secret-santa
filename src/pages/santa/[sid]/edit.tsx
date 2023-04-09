@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { NavBar } from "../../../components/NavBar";
 import { api } from "../../../utils/api";
+import { SuccessToast } from "../../../components/SuccessToast";
 
 interface SecretSantaProps {
   name: string;
@@ -38,7 +39,7 @@ const EditSecretSanta: NextPage = () => {
         <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
           <div>
             {secretSantaMutation.isSuccess && (
-              <div className="text-green-500">Successful updated!</div>
+              <SuccessToast message="Successfully updated event" />
             )}
           </div>
           <form
@@ -50,27 +51,27 @@ const EditSecretSanta: NextPage = () => {
                 id: router.query.sid as string,
                 name: formData.get("name") as string,
                 date: new Date(formData.get("presentsOpening") as string),
-                participants: [],
               };
+              secretSantaMutation.mutate(ss);
             }}
           >
-            <div className="flex w-1/2 flex-col">
-              <label className="text-2xl font-bold text-white">
-                Event Name
+            <div className="flex w-full flex-col sm:w-1/2">
+              <label className="mb-5 text-2xl font-bold text-white">
+                The name of your event
               </label>
               <input
-                className="mt-2 rounded-md p-2 text-black"
+                className="rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
                 type="text"
                 name="name"
                 defaultValue={ss?.data?.name}
               />
             </div>
-            <div className="flex w-1/2 flex-col">
-              <label className="text-2xl font-bold text-white">
-                Date you want to open presents
+            <div className="mt-10 flex w-full flex-col sm:w-1/2">
+              <label className="mb-5 text-2xl font-bold text-white">
+                The date you want to open presents
               </label>
               <input
-                className="mt-2 rounded-md p-2 text-black"
+                className="rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
                 type="date"
                 name="presentsOpening"
                 defaultValue={dayjs(ss?.data?.presentsOpening).format(
@@ -78,12 +79,15 @@ const EditSecretSanta: NextPage = () => {
                 )}
               />
             </div>
-            <div className="flex">
-              <button className="form-input mt-5 text-black" type="submit">
-                Create
+            <div className="mt-10 flex">
+              <button
+                className="block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
+                type="submit"
+              >
+                Save
               </button>
               <button
-                className="form-input mt-5 text-black"
+                className="ml-5 block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
                 type="button"
                 onClick={() => router.push("/santa")}
               >

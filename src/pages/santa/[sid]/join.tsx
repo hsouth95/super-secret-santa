@@ -31,7 +31,7 @@ const SantaJoin: NextPage = () => {
             You've been invited to join the {secretSanta?.data?.name} event!
           </h1>
 
-          {sessionData?.user === undefined ? (
+          {sessionData?.user === undefined && (
             <>
               <h2>
                 In order to enable the full functionality of this app, logging
@@ -41,7 +41,7 @@ const SantaJoin: NextPage = () => {
                 <button>Sign in</button>
               </Link>
             </>
-          ) : null}
+          )}
 
           {sessionData?.user !== undefined ? (
             <>

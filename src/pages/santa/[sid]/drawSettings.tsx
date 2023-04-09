@@ -8,6 +8,7 @@ import { NavBar } from "../../../components/NavBar";
 import { api } from "../../../utils/api";
 import { ParticipantGiftMapping } from "../../../components/ParticipantGiftMapping";
 import { Participant, Prisma } from "@prisma/client";
+import { SuccessToast } from "../../../components/SuccessToast";
 
 type ExcludedParticipantsProps = {
   participantId: string;
@@ -23,7 +24,12 @@ const DrawSettingsPage: NextPage = () => {
   const router = useRouter();
   const { data: sessionData } = useSession();
   const participantMutation =
-    api.participant.bulkExcludeParticipants.useMutation();
+    api.participant.bulkExcludeParticipants.useMutation({
+      onSuccess: () => {
+        console.log("Success!");
+        setExcludedParticipants([]);
+      },
+    });
   const ss = api.secretSanta.getSecretSantaById.useQuery(
     {
       id: router.query.sid as string,
@@ -76,7 +82,7 @@ const DrawSettingsPage: NextPage = () => {
         <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
           <div>
             {participantMutation.isSuccess && (
-              <div className="text-green-500">Successfully updated!</div>
+              <SuccessToast message="Exclusion rules saved!" />
             )}
           </div>
           <h1 className="mb-5 text-3xl font-extrabold tracking-tight sm:text-[3rem]">
@@ -107,14 +113,23 @@ const DrawSettingsPage: NextPage = () => {
           </form>
           <button
             type="button"
-            className="btn"
+            className="mt-10 inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 py-3 px-4 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 sm:w-1/4"
             onClick={(e) => {
               e.preventDefault();
-              participantMutation.mutate(excludedParticipants);
+              if (excludedParticipants.length > 0) {
+                participantMutation.mutate(excludedParticipants);
+              }
             }}
             disabled={participantMutation.isLoading}
           >
-            Save
+            {participantMutation.isLoading && (
+              <span
+                className="inline-block h-4 w-4 animate-spin rounded-full border-[3px] border-current border-t-transparent text-white"
+                role="status"
+                aria-label="loading"
+              ></span>
+            )}
+            {participantMutation.isLoading ? "Save" : "Save"}
           </button>
         </div>
       </main>

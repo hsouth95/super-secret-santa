@@ -37,8 +37,8 @@ export const ParticipantGiftMapping = ({
   };
 
   return (
-    <div className="w-1/3 p-2">
-      <p className="text-3xl font-extrabold">{participant.name}</p>
+    <div className="w-full p-2 sm:w-1/3">
+      <p className="text-3xl font-bold">{participant.name}</p>
       <Select
         className="text-black"
         defaultValue={participant?.excluded.map((p: any) => ({

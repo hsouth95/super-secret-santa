@@ -8,7 +8,7 @@ function createSecretSantaInput() {
     name: z.string(),
     date: z.date().optional(),
     userId: z.string().optional(),
-    participants: z.array(z.string()),
+    participants: z.array(z.string()).optional(),
   });
 }
 
@@ -50,7 +50,7 @@ export const secretSantaRouter = createTRPCRouter({
         },
       });
 
-      input.participants.map(async (participant, index) => {
+      input?.participants?.map(async (participant, index) => {
         await ctx.prisma.participant.create({
           data: {
             name: participant,

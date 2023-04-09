@@ -23,15 +23,19 @@ export const ParticipantInput = ({
       {participantList.map((participant, index) => {
         return (
           <div key={index}>
-            {index === 0 && (
-              <label className="block text-white">
+            {index === 0 ? (
+              <label className="mb-1 block text-white">
                 The first one is you, so give yourself a name to display to the
                 others!
+              </label>
+            ) : (
+              <label className="mb-1 block text-white">
+                Add a new participant
               </label>
             )}
             <input
               type="text"
-              className="form-input my-2 py-3 px-4"
+              className="mb-10 block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
               value={participant}
               onChange={(event) => {
                 const newParticipantList = [...participantList];
@@ -51,7 +55,7 @@ export const ParticipantInput = ({
         );
       })}
       <button
-        className="form-input"
+        className="mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 py-3 px-4 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         onClick={(event) => handleAddParticipant(event)}
       >
         Add another participant

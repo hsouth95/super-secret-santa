@@ -11,3 +11,6 @@ interface ParticipantType {
   name: string;
   userId?: string;
 }
+
+declare module "preline";
+declare module "react-copy-to-clipboard";

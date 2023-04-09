@@ -77,7 +77,7 @@ const Form: React.FC = () => {
           <input
             id="santa-name"
             type="text"
-            className="form-input mt-2 py-3 px-4"
+            className="block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
             value={secretSanta?.name}
             placeholder="Name of the event"
             onChange={(event) => {
@@ -87,18 +87,24 @@ const Form: React.FC = () => {
           />
         </div>
         <div className="my-5">
-          <label htmlFor="santa-date" className="block text-2xl text-white">
+          <label htmlFor="santa-date" className="text-xl text-white">
             When is the event? You don't have to pick it now, we can do that
             later
           </label>
-          <input type="date" className="form-input mt-2 py-3 px-4" />
+          <input
+            type="date"
+            className="block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400"
+          />
         </div>
 
         <label className="block text-2xl text-white">
           Who do you want to invite?
         </label>
         <ParticipantInput handleParticipantChange={handleParticipantChange} />
-        <button className="form-input mt-5" type="submit">
+        <button
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 py-3 px-4 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          type="submit"
+        >
           Create
         </button>
       </div>
