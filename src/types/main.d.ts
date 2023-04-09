@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 interface SecretSantaType {
   name: string;
   presentsOpening?: Date;

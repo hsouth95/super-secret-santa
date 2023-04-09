@@ -36,6 +36,40 @@ export const participantRouter = createTRPCRouter({
         },
       });
     }),
+  bulkExcludeParticipants: protectedProcedure
+    .input(
+      z.array(
+        z.object({
+          participantId: z.string(),
+          excludedParticipantIds: z.array(z.string()).optional(),
+        })
+      )
+    )
+    .mutation(({ ctx, input }) => {
+      const updatedExcludes = input.filter((e) => {
+        return (
+          e && e.excludedParticipantIds && e.excludedParticipantIds.length > 0
+        );
+      });
+      return ctx.prisma.$transaction(
+        updatedExcludes.map((participant) => {
+          return ctx.prisma.participant.update({
+            where: {
+              id: participant.participantId,
+            },
+            data: {
+              excluded: {
+                connect: participant?.excludedParticipantIds?.map(
+                  (id: string) => ({
+                    id: id,
+                  })
+                ),
+              },
+            },
+          });
+        })
+      );
+    }),
   connectParticipantToUser: protectedProcedure
     .input(
       z.object({

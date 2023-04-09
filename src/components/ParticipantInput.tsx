@@ -23,12 +23,12 @@ export const ParticipantInput = ({
       {participantList.map((participant, index) => {
         return (
           <div key={index}>
-            {index === 0 ? (
+            {index === 0 && (
               <label className="block text-white">
                 The first one is you, so give yourself a name to display to the
                 others!
               </label>
-            ) : null}
+            )}
             <input
               type="text"
               className="form-input my-2 py-3 px-4"

@@ -32,9 +32,11 @@ const Santa: NextPage = () => {
             {secretSanta?.data?.name}
           </h1>
           <Link href={`/santa/${sid}/join`}>
-            <h2>Join</h2>
+            <button className="btn mr-5">Join</button>
           </Link>
-
+          <Link href={`/santa/${sid}/drawSettings`}>
+            <button className="btn">Exclude Settings</button>
+          </Link>
           <h2 className="mt-10 text-3xl font-bold text-white">Participants</h2>
           {secretSanta?.data?.participants?.map((participant) => {
             return (
@@ -45,6 +47,9 @@ const Santa: NextPage = () => {
                 }`}
               >
                 <p className="text-xl text-white">{participant.name}</p>
+                <p className="text-xl text-white">
+                  Excluded: {participant.excluded.map((e) => e.name)}
+                </p>
                 <Link href={`/join/${participant.id}`}>
                   <p>
                     {participant.userId

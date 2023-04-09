@@ -31,7 +31,11 @@ export const secretSantaRouter = createTRPCRouter({
           id: input.id,
         },
         include: {
-          participants: true,
+          participants: {
+            include: {
+              excluded: true,
+            },
+          },
         },
       });
     }),
@@ -46,11 +50,13 @@ export const secretSantaRouter = createTRPCRouter({
         },
       });
 
-      input.participants.map(async (participant) => {
+      input.participants.map(async (participant, index) => {
         await ctx.prisma.participant.create({
           data: {
             name: participant,
             secretSantaId: secretSanta.id,
+            connectedAccount: index === 0 ? true : false,
+            userId: index === 0 ? ctx.session?.user?.id : undefined,
           },
         });
       });
@@ -60,7 +66,7 @@ export const secretSantaRouter = createTRPCRouter({
   updateSecretSanta: protectedProcedure
     .input(createSecretSantaInput())
     .mutation(async ({ ctx, input }) => {
-      const secretSanta = await ctx.prisma.secretSanta.update({
+      return await ctx.prisma.secretSanta.update({
         where: {
           id: input.id,
         },
@@ -69,7 +75,5 @@ export const secretSantaRouter = createTRPCRouter({
           presentsOpening: input?.date,
         },
       });
-
-      return secretSanta;
     }),
 });

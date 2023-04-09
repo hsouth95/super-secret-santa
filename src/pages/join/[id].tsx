@@ -21,7 +21,7 @@ const Join: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center bg-gray-700 text-white">
         <div className="justify-top container mt-16 bg-gray-600 py-16 px-10 shadow-lg">
           <h1 className="text-5xl font-bold text-white">
-            You've been invited to join a secret santa!
+            You've been invited to join a secret santa event!
           </h1>
         </div>
       </main>
