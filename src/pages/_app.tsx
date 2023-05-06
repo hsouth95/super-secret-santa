@@ -6,6 +6,7 @@ import { api } from "../utils/api";
 
 import "../styles/globals.css";
 import { useEffect } from "react";
+import { PageLayout } from "../components/Layout";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -18,7 +19,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   }, []);
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <PageLayout>
+        <Component {...pageProps} />
+      </PageLayout>
     </SessionProvider>
   );
 };

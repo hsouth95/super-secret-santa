@@ -10,6 +10,7 @@ import { TrashIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import { SuccessToast } from "../../components/SuccessToast";
 import { PageLayout } from "../../components/Layout";
+
 const Santa: NextPage = () => {
   const router = useRouter();
   const { data: sessionData } = useSession();
@@ -28,7 +29,7 @@ const Santa: NextPage = () => {
       },
     });
   return (
-    <PageLayout>
+    <>
       {participantDeleteMutation.isSuccess && (
         <SuccessToast message="Participant deleted" />
       )}
@@ -187,7 +188,7 @@ const Santa: NextPage = () => {
           );
         })}
       </div>
-    </PageLayout>
+    </>
   );
 };
 

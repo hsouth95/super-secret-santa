@@ -1,17 +1,13 @@
-import React from "react";
-import { useState } from "react";
 import { type NextPage } from "next";
-import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 import { ParticipantInput } from "../../components/ParticipantInput";
 
-import { NavBar } from "../../components/NavBar";
-import { api } from "../../utils/api";
-import { Footer } from "../../components/Footer";
 import dayjs from "dayjs";
 import { PageLayout } from "../../components/Layout";
+import { api } from "../../utils/api";
 
 interface SecretSantaProps {
   name: string;
@@ -22,12 +18,10 @@ interface SecretSantaProps {
 
 const SantaList: NextPage = () => {
   return (
-    <PageLayout>
-      <div className="justify-top container mt-16 bg-gray-600 px-10 py-16 shadow-lg">
-        <h1 className="text-5xl font-bold text-white">Create your event</h1>
-        <Form />
-      </div>
-    </PageLayout>
+    <div className="justify-top container mt-16 bg-gray-600 px-10 py-16 shadow-lg">
+      <h1 className="text-5xl font-bold text-white">Create your event</h1>
+      <Form />
+    </div>
   );
 };
 

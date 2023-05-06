@@ -171,10 +171,10 @@ const FeatureSection = () => {
 
 const Home: NextPage = () => {
   return (
-    <PageLayout>
+    <>
       <HeroSection />
       <FeatureSection />
-    </PageLayout>
+    </>
   );
 };
 
