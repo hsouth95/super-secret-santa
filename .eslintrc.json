@@ -11,5 +11,5 @@
     "@typescript-eslint/no-unescaped-entities": "off",
     "react/no-unescaped-entities": "off"
   },
-  "ignorePatterns": ["commitlint.config.js"]
+  "ignorePatterns": ["commitlint.config.js", "node_modules"]
 }
