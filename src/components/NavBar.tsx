@@ -69,12 +69,6 @@ export const NavBar: React.FC = () => {
             >
               Events
             </Link>
-            <Link
-              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-              href="#"
-            >
-              Blog
-            </Link>
             <UserNavItem />
           </div>
         </div>

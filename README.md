@@ -5,7 +5,7 @@ A [web application](https://super-secret-santa.vercel.app) to allow people to se
 ## Requirements
 
 - Node 18
-- Docker or Mysql running locally
+- Docker (can be built without docker with a local mysql instance)
 
 ## Installation and setup
 
@@ -28,9 +28,7 @@ We can now set up the environment variables. Copy and rename the `.env.example` 
 As of now, only the Discord client ID and secret are required. Getting these values requires creating a discord application. More info at [Setting up DiscordProvider](https://create.t3.gg/en/usage/next-auth#setting-up-the-default-discordprovider)
 
 ```
-# REQUIRED
 DISCORD_CLIENT_ID=
-# REQUIRED
 DISCORD_CLIENT_SECRET=
 ```
 
@@ -59,6 +57,10 @@ If this command causes an issue, the database connection is most likely not vali
 To run the application all you need to do is run the following
 
 ```
+// npm
+npm run dev
+
+// yarn
 yarn run dev
 ```
 
