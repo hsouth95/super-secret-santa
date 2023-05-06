@@ -8,7 +8,7 @@ export const UserNavItem: React.FC = () => {
     return (
       <button
         className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 sm:my-6 sm:border-l sm:border-gray-300 sm:pl-6"
-        onClick={() => signIn()}
+        onClick={() => signIn("discord")}
       >
         <svg
           className="h-4 w-4"
@@ -58,13 +58,13 @@ export const UserNavItem: React.FC = () => {
         aria-labelledby="hs-dropdown-custom-trigger"
       >
         <Link
-          className="flex items-center gap-x-3.5 rounded-md py-2 px-3 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+          className="flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
           href="#"
         >
           Account
         </Link>
         <a
-          className="flex items-center gap-x-3.5 rounded-md py-2 px-3 text-sm text-gray-800 hover:cursor-pointer hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+          className="flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm text-gray-800 hover:cursor-pointer hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
           onClick={() =>
             signOut({
               callbackUrl: "/",

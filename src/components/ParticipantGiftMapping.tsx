@@ -10,11 +10,6 @@ type ParticipantWithExcluded = Prisma.ParticipantGetPayload<{
   };
 }>;
 
-type SelectOptionReturn = {
-  value: any;
-  label: any;
-};
-
 interface ParticipantGiftMappingProps {
   participant: ParticipantWithExcluded;
   possibleGiftMatchers: ParticipantWithExcluded[];

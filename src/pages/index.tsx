@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Link from "next/link";
 
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { PageLayout } from "../components/Layout";
 
 const HeroSection = () => {
@@ -34,12 +34,12 @@ const HeroSection = () => {
 
             <div className="mb-8 mt-8 grid w-full gap-3 sm:inline-flex sm:justify-center">
               {!sessionData?.user?.id ? (
-                <Link
+                <button
                   className="inline-flex items-center justify-center gap-x-3 rounded-md border border-transparent bg-blue-600 px-4 py-3 text-center text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800"
-                  href="/"
+                  onClick={() => signIn("discord")}
                 >
                   Create an account
-                </Link>
+                </button>
               ) : (
                 <>
                   <Link
