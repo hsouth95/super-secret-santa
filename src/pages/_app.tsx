@@ -15,7 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   useEffect(() => {
     // @ts-ignore
     import("preline");
-    document.body.className = "dark bg-gray-900";
+    document.querySelector("html")?.classList.add("dark");
   }, []);
   return (
     <SessionProvider session={session}>

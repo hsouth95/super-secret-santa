@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "yarn run open-browser && next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "open-browser": "start http://localhost:3000"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.16",
