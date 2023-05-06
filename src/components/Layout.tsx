@@ -9,6 +9,13 @@ export const PageLayout = (props: PropsWithChildren) => {
       <Head>
         <title>Super Secret Santa</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="Set up your event and invite your friends to join! We'll handle
+                everything. Let's get rid of the stress of organising a secret
+                santa event."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <NavBar />
       <main>{props.children}</main>
