@@ -1,4 +1,5 @@
-import { Participant, Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
+import { Participant } from "@prisma/client";
 import React, { useState } from "react";
 import Select from "react-select";
 import MultiValue from "react-select";
@@ -28,8 +29,7 @@ export const ParticipantGiftMapping = ({
   possibleGiftMatchers,
   onChange,
 }: ParticipantGiftMappingProps) => {
-  const handleChange = (newValue: SelectOptionReturn[]) => {
-    // const handleChange = (newValue: readonly MultiValue<{value: any, id: any}>)
+  const handleChange = (newValue: any) => {
     onChange(
       participant,
       newValue.map((p: any) => p.value)

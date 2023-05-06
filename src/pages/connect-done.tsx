@@ -1,12 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-
-import { NavBar } from "../components/NavBar";
-
-import { api } from "../utils/api";
 import { Footer } from "../components/Footer";
+import Link from "next/link";
 
 const ConnectDone: NextPage = () => {
   return (
@@ -21,17 +16,17 @@ const ConnectDone: NextPage = () => {
           <div className="mx-auto flex h-full w-full max-w-[60rem] flex-col">
             <header className="z-50 mb-auto flex w-full justify-center py-4">
               <nav className="px-4 sm:px-6 lg:px-8" aria-label="Global">
-                <a
+                <Link
                   className="flex-none text-xl font-semibold dark:text-white sm:text-3xl"
                   href="/"
                   aria-label="Brand"
                 >
                   Super Secret Santa
-                </a>
+                </Link>
               </nav>
             </header>
 
-            <div className="py-10 px-4 text-center sm:px-6 lg:px-8">
+            <div className="px-4 py-10 text-center sm:px-6 lg:px-8">
               <h1 className="block text-7xl font-bold text-gray-800 dark:text-white sm:text-9xl">
                 You're all set!
               </h1>

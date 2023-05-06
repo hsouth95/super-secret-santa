@@ -90,4 +90,17 @@ export const participantRouter = createTRPCRouter({
         },
       });
     }),
+  deleteParticipant: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.participant.delete({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
 });

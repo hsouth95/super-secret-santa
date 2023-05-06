@@ -11,7 +11,7 @@ export const NavBar: React.FC = () => {
         aria-label="Global"
       >
         <div className="flex items-center justify-between">
-          <a
+          <Link
             className="flex-none text-xl font-semibold dark:text-white"
             href="/"
             aria-label="Brand"
@@ -19,7 +19,7 @@ export const NavBar: React.FC = () => {
             <span className="text-xl font-semibold tracking-tight">
               Super Secret Santa
             </span>
-          </a>
+          </Link>
           <div className="sm:hidden">
             <button
               type="button"
@@ -56,7 +56,7 @@ export const NavBar: React.FC = () => {
           id="navbar-collapse-with-animation"
           className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 sm:block"
         >
-          <div className="mt-5 flex flex-col gap-y-4 gap-x-0 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:pl-7">
+          <div className="mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:pl-7">
             <Link
               className="font-medium text-blue-600 dark:text-blue-500 sm:py-6"
               href="/"

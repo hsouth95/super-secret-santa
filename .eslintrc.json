@@ -6,7 +6,10 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/no-unescaped-entities": "off",
+    "react/no-unescaped-entities": "off"
   },
   "ignorePatterns": ["commitlint.config.js"]
 }

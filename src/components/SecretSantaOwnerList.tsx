@@ -35,14 +35,14 @@ export const SecretSantaOwnerList = () => {
           .map((ss) => {
             const warnings = getWarnings(ss);
             return (
-              <Link href={`/santa/${ss.id}`}>
+              <Link href={`/santa/${ss.id}`} key={ss.id}>
                 <div className="my-10 bg-gray-500 p-10">
                   <h2 className="text-2xl font-bold">{ss.name}</h2>
                   {warnings.length > 0 && (
-                    <div className="mt-5 border-2 border-amber-500 py-2 px-1">
-                      {warnings.map((w) => {
+                    <div className="mt-5 border-2 border-amber-500 px-1 py-2">
+                      {warnings.map((w, i) => {
                         return (
-                          <div className="text-amber-500">
+                          <div className="text-amber-500" key={`${ss.id}-${i}`}>
                             <ExclamationTriangleIcon className="inline h-5 w-5" />
                             {" " + w}
                           </div>

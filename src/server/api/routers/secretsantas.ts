@@ -6,7 +6,8 @@ function createSecretSantaInput() {
   return z.object({
     id: z.string().optional(),
     name: z.string(),
-    date: z.date().optional(),
+    presentsOpening: z.date().optional(),
+    drawDate: z.date().optional(),
     userId: z.string().optional(),
     participants: z.array(z.string()).optional(),
   });
@@ -45,7 +46,8 @@ export const secretSantaRouter = createTRPCRouter({
       const secretSanta = await ctx.prisma.secretSanta.create({
         data: {
           name: input.name,
-          presentsOpening: input?.date,
+          presentsOpening: input?.presentsOpening,
+          drawDate: input?.drawDate,
           userId: ctx.session?.user?.id,
         },
       });
@@ -72,7 +74,7 @@ export const secretSantaRouter = createTRPCRouter({
         },
         data: {
           name: input.name,
-          presentsOpening: input?.date,
+          presentsOpening: input?.presentsOpening,
         },
       });
     }),
