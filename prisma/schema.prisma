@@ -63,6 +63,7 @@ model SecretSanta {
   id              String        @id @default(cuid())
   name            String
   presentsOpening DateTime?
+  drawDate        DateTime?
   userId          String
   owner           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   participants    Participant[]
