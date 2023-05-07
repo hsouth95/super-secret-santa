@@ -1,17 +1,11 @@
 import { type NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 import { SecretSantaOwnerList } from "../../components/SecretSantaOwnerList";
 
-import { NavBar } from "../../components/NavBar";
-
-import { api } from "../../utils/api";
-import { PageLayout } from "../../components/Layout";
 const SantaList: NextPage = () => {
   return (
-    <div className="justify-top container mt-16 bg-gray-600 px-10 py-16 shadow-lg">
+    <div className="justify-top container bg-gray-600 px-10 py-16 shadow-lg">
       <h1 className="text-5xl font-bold text-white">
         Upcoming Events you're organising
       </h1>
