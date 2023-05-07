@@ -10,6 +10,7 @@ import { TrashIcon, CalendarIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import { SuccessToast } from "../../components/SuccessToast";
 import { PageLayout } from "../../components/Layout";
+import { env } from "../../env/client.mjs";
 
 const Santa: NextPage = () => {
   const router = useRouter();
@@ -54,6 +55,13 @@ const Santa: NextPage = () => {
               />
             </svg>
             Edit
+          </button>
+        </Link>
+        <Link
+          href={`https://discord.com/api/oauth2/authorize?client_id=${env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&permissions=2048&scope=bot`}
+        >
+          <button className="mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+            Add a bot to a discord server to help manage this event
           </button>
         </Link>
         <h2 className="mt-10 text-3xl font-bold text-white">Draw Name Date</h2>
