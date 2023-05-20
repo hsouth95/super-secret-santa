@@ -2,8 +2,10 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { UserNavItem } from "./UserNavItem";
+import { useSession } from "next-auth/react";
 
 export const NavBar: React.FC = () => {
+  const { data: sessionData } = useSession();
   return (
     <header className="z-50 flex w-full flex-wrap border-b border-gray-200 bg-white py-2 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-0">
       <nav
@@ -58,17 +60,19 @@ export const NavBar: React.FC = () => {
         >
           <div className="mt-5 flex flex-col gap-x-0 gap-y-4 sm:mt-0 sm:flex-row sm:items-center sm:justify-end sm:gap-x-7 sm:gap-y-0 sm:pl-7">
             <Link
-              className="font-medium text-blue-600 dark:text-blue-500 sm:py-6"
+              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
               href="/"
             >
               Home
             </Link>
-            <Link
-              className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
-              href="/santa"
-            >
-              Events
-            </Link>
+            {sessionData?.user && (
+              <Link
+                className="font-medium text-gray-500 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 sm:py-6"
+                href="/santa"
+              >
+                Events
+              </Link>
+            )}
             <UserNavItem />
           </div>
         </div>

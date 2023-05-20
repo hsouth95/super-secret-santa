@@ -5,7 +5,7 @@ import { SecretSantaOwnerList } from "../../components/SecretSantaOwnerList";
 
 const SantaList: NextPage = () => {
   return (
-    <div className="justify-top container bg-gray-600 px-10 py-16 shadow-lg">
+    <div className="justify-top container w-full min-w-full bg-gray-600 px-10 py-16 shadow-lg">
       <h1 className="text-5xl font-bold text-white">
         Upcoming Events you're organising
       </h1>
